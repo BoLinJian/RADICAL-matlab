@@ -1,11 +1,13 @@
 % *****************************************************************
 % Copyright (c) Erik G. Learned-Miller, 2003.
 % *****************************************************************
-function [thetaStar,rotStar]=radicalOptTheta(x,stdev,m,reps,K,range)
-
+%function [thetaStar,rotStar]=radicalOptTheta(x,stdev,m,reps,K,range)
+function [thetaStar,rotStar]=radicalOptTheta(x,stdev,m,reps,K)
+% x is the i-row, j-row : 2 rows vectors
 % m is the number of intervals in an m-spacing
 % reps is the number of points used in smoothing
 % K is the number of angles theta to check for each Jacobi rotation.
+% d = 2
 [d,N]=size(x);
 
 % This routine assumes that it gets whitened data.
@@ -17,13 +19,13 @@ else
   xAug=randn(d,N*reps)*stdev+repmat(x,[1,reps]);
 end
 
-% Then we rotate this data to various angles, evaluate the sum of 
+% Then we rotate this data to various angles, evaluate the sum of
 % the marginals, and take the min.
 
-perc=range/(pi/2);
-numberK=perc*K;
-start=floor(K/2-numberK/2)+1;
-endPt=ceil(K/2+numberK/2);
+%perc=range/(pi/2);
+%numberK=perc*K;
+%start=floor(K/2-numberK/2)+1;
+%endPt=ceil(K/2+numberK/2);
 
 for i=1:K
   % Map theta from -pi/4 to pi/4 instead of 0 to pi/2.
@@ -32,7 +34,7 @@ for i=1:K
   theta= (i-1)/(K-1)*pi/2-pi/4;
   rot=[cos(theta) -sin(theta); sin(theta) cos(theta)];
   rotPts=rot*xAug;
-
+%d =2
   for j=1:d
     marginalAtTheta(j)=vasicekm(rotPts(j,:),m);
   end

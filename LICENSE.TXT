@@ -1,0 +1,56 @@
+* Copyright (c) 2007, Erik Learned-Miller, UMass-Amherst
+* All rights reserved.
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are met:
+*     * Redistributions of source code must retain the above copyright
+*       notice, this list of conditions and the following disclaimer.
+*     * Redistributions in binary form must reproduce the above copyright
+*       notice, this list of conditions and the following disclaimer in the
+*       documentation and/or other materials provided with the distribution.
+*     * Neither the name of the author nor the organization may be used to
+*       endorse or promote products derived from this software without specific
+*       prior written permission.
+*
+* THIS SOFTWARE IS PROVIDED BY Erik Learned-Miller ``AS IS'' AND ANY
+* EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED. IN NO EVENT SHALL <copyright holder> BE LIABLE FOR ANY
+* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Purpose:
+This software is used to find the independent components (or components that are
+as independent as possible) in multi-dimensional data sets.
+The general algorithm is called RADICAL, and is described in the JMLR paper below.
+There is a simple version of the code that works for two-dimensional data and
+another version that works for higher dimension. The code should work well
+(if you have enough data) for fewer than 20 dimensions and 100 dimensions is
+almost certainly too many. Between 20 and 100 dimensions you should try and see
+what kind of results you get (both in terms of accuracy and speed).
+The algorithm is non-parametric, and does NOT rely on any specific assumptions
+about the data (such as the kurtosis or sparseness of components) like Jade,
+FastICA, and many other ICA algorithms. It can find any set of independent
+components as long as they are non-Gaussian (in which case ICA is provably
+impossible).
+
+Source code:
+All source code is provided under a (revised, advertising-clause free) BSD-style
+ license: terms of license. Please cite the JMLR paper below if you use this code.
+
+Download RADICAL 1.2 for MATLAB.
+
+Change history:
+2006/8/14
+Version 1.2 released. Bug fix gives 30 fold speed increase for greater than two dimensions.
+
+
+Publication
+Erik Learned-Miller and John W. Fisher, III.
+ICA using spacings estimates of entropy.
+Journal of Machine Learning Research (JMLR), Volume 4, pp. 1271-1295, 2003.
+[pdf]

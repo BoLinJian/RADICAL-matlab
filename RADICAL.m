@@ -58,7 +58,7 @@
 %              experiments I've done.
 
 function [Yopt,Wopt]=RADICAL(X)
-
+global Yoptt
 % The recommended default parameter values are:
 % K=150;
 % AUG_FLAG=1;
@@ -91,8 +91,8 @@ Whitening_mat=v*s^(-.5)*u';
 X_white=Whitening_mat*X;
 
 sweeps=dim-1;
-oldTotalRot=eye(dim);
-sweepIter=0;             % Current sweep number.
+%oldTotalRot=eye(dim);
+%sweepIter=0;             % Current sweep number.
 totalRot=eye(dim);
 
 %dim * N : xcur is row vectors
@@ -117,7 +117,7 @@ for sweepNum=1:sweeps
   if sweepNum>(sweeps/2)
 	newKfloat=newKfloat*1.3;
     newK=floor(newKfloat);
-	fprintf(1,'startKfloat: %f, newK:%f.\n',startKfloat/1.3, newK);
+	fprintf(1,'newKfloat: %f, newK:%f.\n',startKfloat/1.3, newK);
   else
     newKfloat=startKfloat;
     newK=max(30,floor(newKfloat));
@@ -155,16 +155,15 @@ for sweepNum=1:sweeps
       newRotComponent(i,j)=-sin(thetaStar);
       newRotComponent(j,i)=sin(thetaStar);
       newRotComponent(j,j)=cos(thetaStar);
+      %newRotComponent
       totalRot=newRotComponent*totalRot;
       xcur=totalRot*X_white;
     end
   end
 
-  oldTotalRot=totalRot;
+  %oldTotalRot=totalRot;
 end
 
 Wopt=totalRot*Whitening_mat;
 Yopt=Wopt*X;
-
-
-
+Yoptt=totalRot*X_white;

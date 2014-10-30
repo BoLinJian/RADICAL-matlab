@@ -1,18 +1,17 @@
 % *****************************************************************
 % Copyright (c) Erik G. Learned-Miller, 2003.
 % ********************************************************
-% demo_5d
+% demo_3d
 % ********************************************************
 %
 % This code illustrates the use of RADICAL.m
 % In the examples directory, you will find the following files:
 %
-% data_5d_ind   - samples from a 5-d distribution with independent
+% data_3d_unmixed   - samples from a 5-d distribution with independent
 %                 components.
-% data_5d_mixed - the same samples after they have undergone a
+% fps25_3d_mixed - the same samples after they have undergone a
 %                 linear transformation, which mixes the components
 %                 so that they are no longer independent.
-% A_5d          - the mixing matrix.
 %
 % ********************************************************
 % The program plots two-dimensional marginals of the original
@@ -84,7 +83,7 @@ plot(Yopt(3,:));
 %axis off;
 %title('Original independent components.');
 
-figure;
+%figure;
 clf;
 for i=1:2
   for j=i+1:3
@@ -128,10 +127,10 @@ spows=abs(samp).^2 ;
 #
 figure;
 plot(spows(:,1));
+%plot(pows(:,1));
 figure;
 plot(spows(:,2));
+%plot(pows(:,2));
 figure;
 plot(spows(:,3));
-
-
-
+%plot(pows(:,3));

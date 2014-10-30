@@ -9,19 +9,20 @@ function [thetaStar,rotStar]=radicalOptTheta(x,stdev,m,reps,K)
 % K is the number of angles theta to check for each Jacobi rotation.
 % d = 2
 [d,N]=size(x);
-
+global xAug
 % This routine assumes that it gets whitened data.
 % First, we augment the points with reps near copies of each point.
-
+%repmat(x,[2,3])=(x x x)	X matrix as a tile and replicate 2x3 tiles
+%				(x x x)
 if reps==1
   xAug=x;
 else
   xAug=randn(d,N*reps)*stdev+repmat(x,[1,reps]);
 end
-
+fprintf(1,'size(xAug)=%d %d\n',size(xAug));
 % Then we rotate this data to various angles, evaluate the sum of
 % the marginals, and take the min.
-
+global rotPts
 %perc=range/(pi/2);
 %numberK=perc*K;
 %start=floor(K/2-numberK/2)+1;
@@ -33,7 +34,9 @@ for i=1:K
   % convergence.
   theta= (i-1)/(K-1)*pi/2-pi/4;
   rot=[cos(theta) -sin(theta); sin(theta) cos(theta)];
+  %size(rot) %2x2
   rotPts=rot*xAug;
+  %size(rotPts);2XN
 %d =2
   for j=1:d
     marginalAtTheta(j)=vasicekm(rotPts(j,:),m);

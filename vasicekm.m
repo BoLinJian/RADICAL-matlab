@@ -9,7 +9,8 @@
 %    substantial speed increase.
 
 function h=vasicekm(v,m)
-
+% v : row vector : 
+% m = sqrt(N)
   len=length(v);
   vals=sort(v);
 

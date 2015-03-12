@@ -24,48 +24,58 @@
 format short g;
 
 %row vectors : 3XN
-load examples/fps25_3d_mixed -ASCII
-figure;
-plot(fps25_3d_mixed(1,:));
-figure;
-plot(fps25_3d_mixed(2,:));
-figure;
-plot(fps25_3d_mixed(3,:));
-fps25=fps25_3d_mixed';
+%col vec : N X3
+load examples/fps25_raw -ASCII
+
+%figure;
+%plot(fps25_3d_mixed(1,:));
+%figure;
+%plot(fps25_3d_mixed(2,:));
+%figure;
+%plot(fps25_3d_mixed(3,:));
+
+%col vec
+fps25=fps25_raw;
 #detrend only on "column vector"
 d_data = detrend(fps25);
-figure;
-plot(d_data(:,1));
-figure;
-plot(d_data(:,2));
-figure;
-plot(d_data(:,3));
+
+%figure;
+%plot(d_data(:,1));
+%figure;
+%plot(d_data(:,2));
+%figure;
+%plot(d_data(:,3));
 
 #mean in column vector
 m_data = mean(d_data);
 s_data = std(d_data);
 #n_data = (d_data - m_data) / s_data;
+
 #zscore to zero mean and unit variance
-Z = zscore(d_data);
-mean(Z);
-std(Z);
-figure;
-plot(Z(:,1));
-figure;
-plot(Z(:,2));
-figure;
-plot(Z(:,3));
-#colum vectors to row vectors
-fps25_3d_mixed=Z';
+%Z = zscore(d_data);
+%mean(Z);
+%std(Z);
+%figure;
+%plot(Z(:,1));
+%figure;
+%plot(Z(:,2));
+%figure;
+%plot(Z(:,3));
+%#colum vectors to row vectors
+%fps25_3d_mixed=Z';
+
+%row vec
+fps25_3d_mixed=d_data';
 #%row vectors : 3XN
 [Yopt,Wopt]=RADICAL(fps25_3d_mixed);
 data_3d_unmixed=Yopt;
-figure;
-plot(Yopt(1,:));
-figure;
-plot(Yopt(2,:));
-figure;
-plot(Yopt(3,:));
+
+%figure;
+%plot(Yopt(1,:));
+%figure;
+%plot(Yopt(2,:));
+%figure;
+%plot(Yopt(3,:));
 
 %figure(1);
 %clf;
@@ -83,6 +93,7 @@ plot(Yopt(3,:));
 %axis off;
 %title('Original independent components.');
 
+if(0)
 %figure;
 clf;
 for i=1:2
@@ -134,3 +145,4 @@ plot(spows(:,2));
 figure;
 plot(spows(:,3));
 %plot(pows(:,3));
+endif

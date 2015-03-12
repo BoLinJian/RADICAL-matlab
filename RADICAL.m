@@ -90,6 +90,10 @@ m=floor(sqrt(N));      % m for use in m-spacing estimator.
 Whitening_mat=v*s^(-.5)*u';
 X_white=Whitening_mat*X;
 
+dlmwrite('covX.txt',cov(X'),'delimiter','\t','precision',5);
+dlmwrite('X_white.txt',X_white','delimiter','\t','precision',5);
+dlmwrite('Whitening_mat.txt',Whitening_mat','delimiter','\t','precision',5);
+
 sweeps=dim-1;
 %oldTotalRot=eye(dim);
 %sweepIter=0;             % Current sweep number.
@@ -97,6 +101,7 @@ totalRot=eye(dim);
 
 %dim * N : xcur is row vectors
 xcur=X_white;
+dlmwrite('xcur.txt',xcur','delimiter','\t','precision',5);
 
 % K represents the number of rotations to examine on the FINAL
 % sweep. To optimize performance, we start with a smaller number of

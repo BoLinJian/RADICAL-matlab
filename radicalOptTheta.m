@@ -17,9 +17,17 @@ global xAug
 if reps==1
   xAug=x;
 else
-  xAug=randn(d,N*reps)*stdev+repmat(x,[1,reps]);
+ rn=randn(d,N*reps)*stdev;
+ rp=repmat(x,[1,reps]);
+  %xAug=randn(d,N*reps)*stdev+repmat(x,[1,reps]);
+  xAug = rn + rp;
 end
 fprintf(1,'size(xAug)=%d %d\n',size(xAug));
+
+dlmwrite('xAug.txt',xAug','delimiter','\t','precision',5);
+dlmwrite('rn.txt',rn,'delimiter','\t','precision',5);
+dlmwrite('rp.txt',rp,'delimiter','\t','precision',5);
+
 % Then we rotate this data to various angles, evaluate the sum of
 % the marginals, and take the min.
 global rotPts
@@ -36,6 +44,9 @@ for i=1:K
   rot=[cos(theta) -sin(theta); sin(theta) cos(theta)];
   %size(rot) %2x2
   rotPts=rot*xAug;
+  dlmwrite('rot.txt',rot,'delimiter','\t','precision',5);
+  dlmwrite('rotPts.txt',rotPts','delimiter','\t','precision',5);
+  exit;
   %size(rotPts);2XN
 %d =2
   for j=1:d

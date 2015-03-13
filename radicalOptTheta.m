@@ -44,9 +44,9 @@ for i=1:K
   rot=[cos(theta) -sin(theta); sin(theta) cos(theta)];
   %size(rot) %2x2
   rotPts=rot*xAug;
-  dlmwrite('rot.txt',rot,'delimiter','\t','precision',5);
-  dlmwrite('rotPts.txt',rotPts','delimiter','\t','precision',5);
-  exit;
+ % dlmwrite('rot.txt',rot,'delimiter','\t','precision',5);
+ % dlmwrite('rotPts.txt',rotPts','delimiter','\t','precision',5);
+ % exit;
   %size(rotPts);2XN
 %d =2
   for j=1:d

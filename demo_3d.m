@@ -70,12 +70,12 @@ fps25_3d_mixed=d_data';
 [Yopt,Wopt]=RADICAL(fps25_3d_mixed);
 data_3d_unmixed=Yopt;
 
-%figure;
-%plot(Yopt(1,:));
-%figure;
-%plot(Yopt(2,:));
-%figure;
-%plot(Yopt(3,:));
+figure;
+plot(Yopt(1,:));
+figure;
+plot(Yopt(2,:));
+figure;
+plot(Yopt(3,:));
 
 %figure(1);
 %clf;
@@ -124,6 +124,8 @@ for i=1:2
   end
 end
 subplot(2,2,2);
+endif
+
 axis off;
 title('Unmixed components.');
 #row to column : 3XN -> NX3
@@ -145,4 +147,3 @@ plot(spows(:,2));
 figure;
 plot(spows(:,3));
 %plot(pows(:,3));
-endif

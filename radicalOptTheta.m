@@ -17,20 +17,22 @@ global xAug
 if reps==1
   xAug=x;
 else
- rn=randn(d,N*reps)*stdev;
+
+ rn=randn(d,N*reps);
+ rns=rn*stdev;
  rp=repmat(x,[1,reps]);
   %xAug=randn(d,N*reps)*stdev+repmat(x,[1,reps]);
-  xAug = rn + rp;
+  xAug = rns + rp;
 end
 fprintf(1,'size(xAug)=%d %d\n',size(xAug));
 
-dlmwrite('xAug.txt',xAug','delimiter','\t','precision',5);
-dlmwrite('rn.txt',rn,'delimiter','\t','precision',5);
-dlmwrite('rp.txt',rp,'delimiter','\t','precision',5);
+%dlmwrite('rnt.txt',rn','delimiter','\t','precision',5);
+%dlmwrite('rnst.txt',rns','delimiter','\t','precision',5);
+%dlmwrite('rpt.txt',rp','delimiter','\t','precision',5);
+%dlmwrite('xAugt.txt',xAug','delimiter','\t','precision',5);
 
 % Then we rotate this data to various angles, evaluate the sum of
 % the marginals, and take the min.
-global rotPts
 %perc=range/(pi/2);
 %numberK=perc*K;
 %start=floor(K/2-numberK/2)+1;
@@ -44,22 +46,22 @@ for i=1:K
   rot=[cos(theta) -sin(theta); sin(theta) cos(theta)];
   %size(rot) %2x2
   rotPts=rot*xAug;
- % dlmwrite('rot.txt',rot,'delimiter','\t','precision',5);
- % dlmwrite('rotPts.txt',rotPts','delimiter','\t','precision',5);
- % exit;
+%  dlmwrite('rot.txt',rot,'delimiter','\t','precision',5);
+%  dlmwrite('rotPtst.txt',rotPts','delimiter','\t','precision',5);
   %size(rotPts);2XN
 %d =2
   for j=1:d
     marginalAtTheta(j)=vasicekm(rotPts(j,:),m);
   end
   ent(i)=sum(marginalAtTheta);
+%  exit;
 end
-
+%dlmwrite('ent.txt',ent,'delimiter','\t','precision',5);
 [val,ind]=sort(ent);
+%fprintf(1,'ind=%d.\n',ind);
 thetaStar= (ind(1)-1)/(K-1)*pi/2-pi/4;
 fprintf(1,'rotated %5.2f degrees.\n',thetaStar/(2*pi)*360);
 rotStar=[cos(thetaStar) -sin(thetaStar); sin(thetaStar) cos(thetaStar)];
-
-
+%exit 1
 
 

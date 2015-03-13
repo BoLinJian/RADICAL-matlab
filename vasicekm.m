@@ -19,3 +19,7 @@ function h=vasicekm(v,m)
   hvec=log(intvals);
   h=sum(hvec);
 
+%  dlmwrite('valst.txt',vals','delimiter','\t','precision',5);
+%  dlmwrite('intvalst.txt',intvals','delimiter','\t','precision',5);
+%  dlmwrite('hvect.txt',hvec','delimiter','\t','precision',5);
+%  dlmwrite('h.txt',h,'delimiter','\t','precision',5);

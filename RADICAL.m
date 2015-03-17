@@ -168,9 +168,9 @@ for sweepNum=1:sweeps
 
   %oldTotalRot=totalRot;
 end
-totalRot
-Whitening_mat
+%totalRot
+%Whitening_mat
 Wopt=totalRot*Whitening_mat;
 Yopt=Wopt*X;
-cov(Yopt')
+%cov(Yopt')
 Yoptt=totalRot*X_white;

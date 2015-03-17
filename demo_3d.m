@@ -140,10 +140,13 @@ spows=abs(samp).^2 ;
 #
 figure;
 plot(spows(:,1));
-%plot(pows(:,1));
+figure;
+plot(pows(:,1));
 figure;
 plot(spows(:,2));
-%plot(pows(:,2));
+figure;
+plot(pows(:,2));
 figure;
 plot(spows(:,3));
-%plot(pows(:,3));
+figure;
+plot(pows(:,3));
